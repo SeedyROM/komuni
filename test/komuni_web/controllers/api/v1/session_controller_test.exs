@@ -22,7 +22,7 @@ defmodule KomuniWeb.API.V1.SessionControllerTest do
       conn = post(conn, Routes.api_v1_session_path(conn, :create, @valid_params))
 
       assert json = json_response(conn, 200)
-      assert json["data"]["access_token"]
+      assert json["data"]["token"]
       assert json["data"]["renewal_token"]
     end
 
@@ -36,7 +36,7 @@ defmodule KomuniWeb.API.V1.SessionControllerTest do
   end
 
   describe "renew/2" do
-    setup %{conn: conn, user: user} do
+    setup %{conn: conn, user: _user} do
       authed_conn = post(conn, Routes.api_v1_session_path(conn, :create, @valid_params))
       :timer.sleep(100)
 
@@ -50,7 +50,7 @@ defmodule KomuniWeb.API.V1.SessionControllerTest do
         |> post(Routes.api_v1_session_path(conn, :renew))
 
       assert json = json_response(conn, 200)
-      assert json["data"]["access_token"]
+      assert json["data"]["token"]
       assert json["data"]["renewal_token"]
     end
 
@@ -67,7 +67,7 @@ defmodule KomuniWeb.API.V1.SessionControllerTest do
   end
 
   describe "delete/2" do
-    setup %{conn: conn, user: user} do
+    setup %{conn: conn, user: _user} do
       authed_conn = post(conn, Routes.api_v1_session_path(conn, :create, @valid_params))
       :timer.sleep(100)
 

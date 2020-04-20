@@ -17,7 +17,7 @@ defmodule KomuniWeb.API.V1.RegistrationControllerTest do
       conn = post(conn, Routes.api_v1_registration_path(conn, :create, @valid_params))
 
       assert json = json_response(conn, 200)
-      assert json["data"]["access_token"]
+      assert json["data"]["token"]
       assert json["data"]["renewal_token"]
     end
 
